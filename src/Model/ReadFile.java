@@ -6,14 +6,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ReadFile {
-    public String text(String fpath){
-        String data = null;
+    public static String text(String fpath){
+        String data = "xd";
         try {
             File myObj = new File(fpath);
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 data = myReader.nextLine();
-                System.out.println(data);
             }
             myReader.close();
         } catch (FileNotFoundException e) {

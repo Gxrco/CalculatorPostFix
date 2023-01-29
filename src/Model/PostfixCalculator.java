@@ -11,7 +11,6 @@ public class PostfixCalculator implements IPostfixCalculator{
     @Override
     public boolean isOneItem(IStack operandos) {
         return operandos.count() == 1;
-
     }
 
     @Override
@@ -36,13 +35,13 @@ public class PostfixCalculator implements IPostfixCalculator{
 
     @Override
     public boolean isOperator(String item) {
-        return false;
+        return item.equals("+") || item.equals("-") || item.equals("/") || item.equals("*");
     }
 
     @Override
     public ArrayList<String> getItems(String _expresion) {
-        String[] splitInput = _expresion.split("");
-        List<String> list = Arrays.asList(splitInput);
-        return (ArrayList<String>) list;
+        String[] splitInput = _expresion.split(" ");
+        ArrayList<String> list = new ArrayList<>(Arrays.asList(splitInput));
+        return list;
     }
 }

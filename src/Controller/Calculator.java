@@ -3,56 +3,56 @@ package Controller;
 import Model.PostfixCalculator;
 import Model.Stack;
 
+import java.util.ArrayList;
+
 public class Calculator {
 
-    private Stack<Integer> memory;
-    private String postFix;
+    private static Stack<Integer> stackuwu_nia;
 
-    PostfixCalculator pc = new PostfixCalculator();
-
+    static PostfixCalculator pc = new PostfixCalculator();
 
 
     public Calculator(){
-        memory = new Stack<>();
-        postFix = "";
+        stackuwu_nia = new Stack<Integer>();
     }
 
-    public int getValue(String postFix, int x){
-        for (int i =0; i<postFix.length(); i++){
-            char ch = postFix.charAt(i);
-            if('0' <= ch && ch<='9'){
-                memory.push(ch-'0');
-            }else{
-                switch(ch){
-                    case 'x':
-                        memory.push(x);
-                        break;
+    public static void getValue(String operator, int A, int B){
+        switch(operator){
+            case "+":
+                stackuwu_nia.push(pc.suma(A, B));
+                break;
 
-                    case '+':
-                        int b = memory.pull();
-                        int a = memory.pull();
-                        pc.suma(a,b);
+            case "-":
+                stackuwu_nia.push(pc.resta(A, B));
+                break;
 
-                    case '-':
-                        int d = memory.pull();
-                        int c = memory.pull();
-                        pc.resta(c,d);
+            case "*":
+                stackuwu_nia.push(pc.multiplicacion(A, B));
+                break;
 
-                    case '*':
-                        int f = memory.pull();
-                        int e = memory.pull();
-                        pc.resta(e,f);
+            case "/":
+                stackuwu_nia.push(pc.division(A, B));
+                break;
+        }
+    }
 
-                    case '/':
-                        int h = memory.pull();
-                        int g = memory.pull();
-                        pc.resta(g,h);
-                }
+    public static int mainOperation(String postfix){
+        ArrayList<String> data = pc.getItems(postfix);
+        for (String datum : data) {
+            if (!pc.isOperator(datum)) {
+                stackuwu_nia.push(Integer.valueOf(datum));
             }
         }
 
-        return memory.pull();
+        for (String datum : data) {
+            if (pc.isOperator(datum)) {
+                int A = stackuwu_nia.pull();
+                int B = stackuwu_nia.pull();
+                getValue(datum, A, B);
+            }
+        }
 
+        return stackuwu_nia.pull();
     }
 
 }
