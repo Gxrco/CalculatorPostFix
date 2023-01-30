@@ -6,6 +6,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ReadFile {
+    /**
+     *Lee la ruta del archivo donde se encuentra el Postfix
+     * @param fpath
+     * @return data
+     */
     public static String text(String fpath){
         String data = "xd";
         try {
